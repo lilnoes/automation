@@ -6,17 +6,19 @@ from datetime import datetime
 import requests as r
 import subprocess
 
-response_url = ""
-
 obsApi = Blueprint("obsApi", __name__)
 
 @obsApi.route("/getcommand", methods=["POST", "GET"])
 def getCommand():
     return app.config["flask"]
 
+
 @obsApi.route("/setStatus", methods=["POST", "GET"])
 def setStatus():
+    time = req.form["time"]
     status = req.form["status"]
+    if time == app.config["obs"]["time"]:
+        return app.config["obs"]
+    app.config["obs"]["time"] = time
     app.config["obs"]["status"] = status
-    print("new status", app.config["obs"])
     return app.config["obs"]

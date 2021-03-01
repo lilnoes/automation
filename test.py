@@ -1,8 +1,4 @@
 import subprocess
-from datetime import datetime
-
-
-
-d = {"a": 1, "b": 2}
-c = {**d, "c": 3}
-print(c)
+d = subprocess.run("ls -t /home/leon | grep '.png'", capture_output=True, shell=True, encoding="utf-8")
+d = d.stdout.split("\n")
+print(d[0])
