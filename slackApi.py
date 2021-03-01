@@ -4,10 +4,33 @@ import slackUtils as utils
 import json
 from datetime import datetime
 import requests as r
+import subprocess
 
 response_url = ""
 
 slackApi = Blueprint("slackApi", __name__)
+
+@slackApi.route("/getstatus", methods=["POST"])
+def getStatus():
+	print("status", app.config["obs"])
+	return f'OBS is {app.config["obs"]["status"]}'
+
+@slackApi.route("/startrecord", methods=["POST"])
+def startRecording():
+	print(req.form)
+	app.config["flask"]["time"] = datetime.now().timestamp()
+	app.config["flask"]["command"] = "startrecord"
+	app.config["flask"]["param"] = "zoom"
+	return f'wait for some time...'
+
+@slackApi.route("/stoprecord", methods=["POST"])
+def stopRecording():
+	print(req.form)
+	app.config["flask"]["time"] = datetime.now().timestamp()
+	app.config["flask"]["command"] = "stoprecord"
+	app.config["flask"]["param"] = "zoom"
+	return f'stopped recording successfully'
+
 
 @slackApi.route("/input", methods=["POST"])
 def response():

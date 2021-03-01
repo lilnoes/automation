@@ -1,5 +1,0 @@
-credentials.json
-ENV.py
-*.log
-__pycache__
-*.pickle

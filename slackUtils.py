@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from slack import WebClient
 import slackViews as views
-import ENV
+import env
 
-TOKEN = ENV.TOKEN
+TOKEN = env.TOKEN
 
 client = WebClient(token=TOKEN)
 
